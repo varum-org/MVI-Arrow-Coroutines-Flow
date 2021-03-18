@@ -1,84 +1,37 @@
 package com.vtnd.duynn.utils.types
 
+import androidx.core.util.PatternsCompat
+
 /**
  * Created by duynn100198 on 3/17/21.
  */
-class ValidateErrorType {
-
-    interface ErrorType<T> {
-        val message: T
+object ValidateErrorType {
+    enum class ValidationError {
+        INVALID_EMAIL_ADDRESS,
+        INVALID_PASSWORD,
     }
 
-    enum class EmailErrorType : ErrorType<String?> {
-        EMAIL_EMPTY {
-            override val message: String
-                get() = "Empty, please enter!"
-        },
-        INVALID_EMAIL {
-            override val message: String
-                get() = "Invalid email format!"
-        },
-        LEAST_CHARACTER {
-            override val message: String
-                get() = "Please enter at least 6 characters!"
-        },
-        NONE {
-            override val message: String?
-                get() = null
+    fun validateEmail(email: String?): Set<ValidationError> {
+        val errors = mutableSetOf<ValidationError>()
+
+        if (email == null || !PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()) {
+            errors += ValidationError.INVALID_EMAIL_ADDRESS
         }
+
+        // more validation here
+
+        return errors
     }
 
-    enum class PasswordErrorType : ErrorType<String?> {
-        PASSWORD_EMPTY {
-            override val message: String
-                get() = "Empty, please enter!"
-        },
-        LEAST_CHARACTER {
-            override val message: String
-                get() = "Please enter at least 6 characters!"
-        },
-        NONE {
-            override val message: String?
-                get() = null
-        }
-    }
+    fun validatePassword(password: String?): Set<ValidationError> {
+        val errors = mutableSetOf<ValidationError>()
 
-    enum class UserNameErrorType : ErrorType<String?> {
-        USER_NAME_EMPTY {
-            override val message: String
-                get() = "Empty, please enter!"
-        },
-        LEAST_CHARACTER {
-            override val message: String
-                get() = "Please enter at least 6 characters!"
-        },
-        NONE {
-            override val message: String?
-                get() = null
+        if (password == null || password != "123456") {
+            errors += ValidationError.INVALID_PASSWORD
         }
-    }
-    enum class BaseErrorType : ErrorType<String?> {
-        IS_EMPTY {
-            override val message: String
-                get() = "Empty, please enter!"
-        },
-        NONE {
-            override val message: String?
-                get() = null
-        }
-    }
-    enum class PhoneErrorType : ErrorType<String?> {
-        PHONE_EMPTY {
-            override val message: String
-                get() = "Empty, please enter!"
-        },
-        INVALID_PHONE {
-            override val message: String
-                get() =  "Invalid phone number"
-        },
-        NONE {
-            override val message: String?
-                get() = null
-        }
+
+        // more validation here
+
+        return errors
     }
 }
