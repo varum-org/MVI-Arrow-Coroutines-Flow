@@ -1,0 +1,11 @@
+package com.vtnd.duynn.di
+
+import com.vtnd.duynn.domain.usecase.UserLoginUseCase
+import org.koin.dsl.module
+
+/**
+ * Created by duynn100198 on 3/17/21.
+ */
+val useCaseModule = module {
+    factory { UserLoginUseCase(userRepository = get()) }
+}
