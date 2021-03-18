@@ -1,7 +1,5 @@
 package com.vtnd.duynn.utils.extension
 
-import android.view.View
-import androidx.annotation.CheckResult
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -9,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import com.vtnd.duynn.data.error.DomainResult
 import com.vtnd.duynn.presentation.mapper.ErrorMapper
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
