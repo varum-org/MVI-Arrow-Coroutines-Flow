@@ -1,6 +1,7 @@
 package com.vtnd.duynn.di
 
 import com.vtnd.duynn.presentation.ui.auth.login.LoginViewModel
+import com.vtnd.duynn.presentation.ui.splash.SplashViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -22,5 +23,8 @@ val viewModelModule = module {
             loginUseCase = get(),
             savedStateHandle = it.get()
         )
+    }
+    viewModel {
+        SplashViewModel(checkAuthUseCase = get())
     }
 }

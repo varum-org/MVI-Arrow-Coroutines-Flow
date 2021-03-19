@@ -15,14 +15,15 @@
         android:theme="@style/Theme.MVIArrowRxKotlinCoroutinesFlow"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".presentation.ui.auth.AuthActivity">
+        <activity
+            android:name=".presentation.ui.splash.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.ui.auth.AuthActivity" />
         <activity android:name=".presentation.ui.main.MainActivity" />
     </application>
-
 </manifest>
