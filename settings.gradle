@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "MVI-Arrow-RxKotlin-Coroutines-Flow"
+rootProject.name = "MVI-Arrow-Coroutines-Flow"
