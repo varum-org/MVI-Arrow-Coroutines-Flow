@@ -4,12 +4,16 @@ package com.vtnd.duynn.utils.extension
  * Created by duynn100198 on 3/18/21.
  */
 import android.view.View
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
+import com.vtnd.duynn.utils.dialog.AlertDialogFragment
+import timber.log.Timber
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
@@ -59,3 +63,14 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
 
 fun <T : ViewBinding> Fragment.viewBinding(viewBindingFactory: (View) -> T) =
     FragmentViewBindingDelegate(this, viewBindingFactory)
+
+fun FragmentActivity.dismissAlertDialog() {
+    try {
+        val dialogFragment =
+            supportFragmentManager.findFragmentByTag(AlertDialogFragment::class.java.simpleName) as? DialogFragment
+        dialogFragment?.dismissAllowingStateLoss()
+        Timber.d("dismissAlertDialog")
+    } catch (e: Exception) {
+        Timber.d("dismissAlertDialog $e")
+    }
+}

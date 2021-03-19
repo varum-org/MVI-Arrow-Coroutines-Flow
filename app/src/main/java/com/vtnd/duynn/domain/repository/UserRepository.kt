@@ -21,7 +21,7 @@ interface UserRepository {
     suspend fun register(user: RegisterBody): DomainResult<Any>
     suspend fun getAllUser(): DomainResult<List<UserData>>
     suspend fun logout(): DomainResult<Any>
-    fun userObservable(): Flow<DomainResult<Option<UserData>>>
+    fun userObservable(): Flow<DomainResult<Option<UserData> >>
     suspend fun checkAuth(): DomainResult<Boolean>
     suspend fun checkAuthInternal()
     suspend fun editUser(
