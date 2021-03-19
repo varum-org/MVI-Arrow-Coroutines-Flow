@@ -2,6 +2,7 @@ package com.vtnd.duynn.data.repository
 
 import android.net.Uri
 import arrow.core.Either
+import arrow.core.Either.Companion.catch
 import arrow.core.Option
 import arrow.core.extensions.fx
 import com.vtnd.duynn.data.error.AppError
@@ -62,7 +63,7 @@ class UserRepositoryImpl(
         email: String,
         password: String
     ): DomainResult<Unit?> {
-        return Either.catch(mapper::map) {
+        return catch {
             val (user, auth_token) =
                 userRemoteSource
                     .login(email, password, "deviceToken")
@@ -76,42 +77,42 @@ class UserRepositoryImpl(
                 .let {
                     userLocalSource.saveUser(it)
                 }
-        }
+        }.mapLeft(mapper::map)
     }
 
     override suspend fun register(user: RegisterBody): DomainResult<Any> {
-        return Either.catch(mapper::map) {
+        return catch {
             userRemoteSource.register(user)
                 .unwrap()
                 .also { Timber.d("Register User") }
-        }
+        }.mapLeft(mapper::map)
     }
 
     override suspend fun getAllUser(): DomainResult<List<UserData>> {
-        return Either.catch(mapper::map) {
+        return catch {
             withContext(dispatchersProvider.dispatcher()) {
                 userRemoteSource.getAllUser().unwrap()
                     .also { Timber.d("Get Users ") }
             }
-        }
+        }.mapLeft(mapper::map)
     }
 
     override suspend fun logout(): DomainResult<Any> {
-        return Either.catch(mapper::map) {
+        return catch {
             userRemoteSource.logout("token")
                 .unwrap()
                 .also { Timber.d("Logout") }
             userLocalSource.removeUserAndToken()
-        }
+        }.mapLeft(mapper::map)
     }
 
-    override fun userObservable(): Flow<DomainResult<Option<UserData>>> = userObservable
+    override fun userObservable() = userObservable
 
     override suspend fun checkAuth(): DomainResult<Boolean> {
-        return Either.catch(mapper::map) {
+        return catch {
             checkAuthDeferred.await()
             userLocalSource.token() !== null && userLocalSource.user() !== null
-        }
+        }.mapLeft(mapper::map)
     }
 
     override suspend fun checkAuthInternal() {
@@ -148,7 +149,7 @@ class UserRepositoryImpl(
         phone: String,
         avatarUri: Uri?
     ): DomainResult<Any> {
-        return Either.catch(mapper::map) {
+        return catch {
             withContext((dispatchersProvider.dispatcher())) {
                 val response = userRemoteSource.editUser(id, userName, phone, avatarUri)
                 if (response.success) {
@@ -160,23 +161,23 @@ class UserRepositoryImpl(
                 }
                 response.unwrap()
             }
-        }
+        }.mapLeft(mapper::map)
     }
 
     override suspend fun sendCode(email: String): DomainResult<Any> {
-        return Either.catch(mapper::map) {
+        return catch {
             withContext(dispatchersProvider.dispatcher()) {
                 userRemoteSource.sendCode(email).unwrap()
             }
-        }
+        }.mapLeft(mapper::map)
     }
 
     override suspend fun checkCode(code: Int, password: String): DomainResult<Any> {
-        return Either.catch(mapper::map) {
+        return catch {
             withContext(dispatchersProvider.dispatcher()) {
                 userRemoteSource.checkCode(code, password).unwrap()
             }
-        }
+        }.mapLeft(mapper::map)
     }
 
     companion object {

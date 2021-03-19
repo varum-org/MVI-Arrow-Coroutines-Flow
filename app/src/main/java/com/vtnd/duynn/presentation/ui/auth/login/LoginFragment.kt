@@ -1,5 +1,6 @@
 package com.vtnd.duynn.presentation.ui.auth.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isInvisible
@@ -10,6 +11,7 @@ import com.vtnd.duynn.data.error.getMessage
 import com.vtnd.duynn.databinding.FragmentLoginBinding
 import com.vtnd.duynn.presentation.base.BaseFragment
 import com.vtnd.duynn.presentation.ui.auth.login.LoginContract.*
+import com.vtnd.duynn.presentation.ui.main.MainActivity
 import com.vtnd.duynn.utils.extension.*
 import com.vtnd.duynn.utils.types.ValidateErrorType
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -40,6 +42,8 @@ class LoginFragment : BaseFragment<ViewIntent, ViewState, SingleEvent, LoginView
         return when (event) {
             is SingleEvent.LoginSuccess -> {
                 viewBinding.root.snack("Login Success").show()
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+                requireActivity().finish()
             }
             is SingleEvent.LoginFailure -> {
                 viewBinding.root.snack("Login Failure ${event.throwable.getMessage()}").show()
