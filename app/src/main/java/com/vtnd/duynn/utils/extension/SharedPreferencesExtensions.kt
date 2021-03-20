@@ -2,9 +2,6 @@ package com.vtnd.duynn.utils.extension
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import arrow.core.Option
-import arrow.core.getOrElse
-import arrow.core.toOption
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow

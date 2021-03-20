@@ -62,11 +62,6 @@ dependencies {
     def koin_version = '2.2.2'
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
-    // Arrow
-    def arrow_version = "0.10.5"
-    implementation "io.arrow-kt:arrow-syntax:$arrow_version"
-    kapt "io.arrow-kt:arrow-meta:$arrow_version"
-
     // Retrofit
     def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"

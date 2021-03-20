@@ -7,7 +7,6 @@ import androidx.core.view.isInvisible
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.vtnd.duynn.R
-import com.vtnd.duynn.data.error.getMessage
 import com.vtnd.duynn.databinding.FragmentLoginBinding
 import com.vtnd.duynn.presentation.base.BaseFragment
 import com.vtnd.duynn.presentation.ui.auth.login.LoginContract.*

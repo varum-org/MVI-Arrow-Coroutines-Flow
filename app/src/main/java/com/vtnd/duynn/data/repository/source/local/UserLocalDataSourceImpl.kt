@@ -8,6 +8,7 @@ import com.vtnd.duynn.data.repository.source.local.api.pref.SharedPrefKey.KEY_TO
 import com.vtnd.duynn.data.repository.source.local.api.pref.SharedPrefKey.KEY_USER
 import com.vtnd.duynn.domain.scheduler.AppDispatchers.IO
 import com.vtnd.duynn.domain.scheduler.DispatchersProvider
+import com.vtnd.duynn.utils.extension.mapNotNull
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.buffer
@@ -35,7 +36,8 @@ class UserLocalDataSourceImpl(
 
     private var userObservable = sharedPrefApi.observeString(KEY_USER)
         .flowOn(dispatchersProvider.dispatcher())
-        .map { json -> json.mapNotNull { it.toUserData() } }
+        .map { json ->
+            json.mapNotNull { it.toUserData() } }
         .buffer(1)
         .also { Timber.i("User $it") }
 

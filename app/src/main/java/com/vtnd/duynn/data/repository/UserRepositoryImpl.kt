@@ -1,21 +1,16 @@
 package com.vtnd.duynn.data.repository
 
 import android.net.Uri
-import arrow.core.Either
-import arrow.core.Either.Companion.catch
-import arrow.core.Option
-import arrow.core.extensions.fx
 import com.vtnd.duynn.data.error.AppError
-import com.vtnd.duynn.data.error.DomainResult
-import com.vtnd.duynn.data.error.rightResult
 import com.vtnd.duynn.data.model.UserData
 import com.vtnd.duynn.data.repository.source.UserDataSource
 import com.vtnd.duynn.data.repository.source.remote.body.RegisterBody
+import com.vtnd.duynn.domain.DomainResult
 import com.vtnd.duynn.domain.repository.UserRepository
 import com.vtnd.duynn.domain.scheduler.AppDispatchers.IO
 import com.vtnd.duynn.domain.scheduler.DispatchersProvider
 import com.vtnd.duynn.presentation.mapper.ErrorMapper
-import com.vtnd.duynn.utils.extension.catchError
+import com.vtnd.duynn.utils.extension.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinApiExtension
@@ -49,12 +44,8 @@ class UserRepositoryImpl(
 
     private val userObservable: Flow<Either<AppError, Option<UserData>>> =
         userLocalSource.userObservable()
-            .combine(userLocalSource.tokenObservable()) { userOptional, tokenOptional ->
-                Option.fx {
-                    !tokenOptional
-                    val user = !userOptional
-                    user
-                }.rightResult()
+            .combine(userLocalSource.tokenObservable()) { userOptional, _ ->
+                userOptional.rightResult()
             }.catchError(mapper)
             .distinctUntilChanged()
             .buffer(1)
