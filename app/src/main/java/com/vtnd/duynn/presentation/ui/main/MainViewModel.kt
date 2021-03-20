@@ -16,5 +16,4 @@ class MainViewModel(private val userObservableUseCase: UserObservableUseCase) : 
         .map { it.toOption().flatten() }
         .distinctUntilChanged()
         .filter { it.isEmpty() }
-        .map { }
 }

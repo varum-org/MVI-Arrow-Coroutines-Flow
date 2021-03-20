@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -12,7 +11,7 @@ import com.vtnd.duynn.R
 import com.vtnd.duynn.databinding.ActivityMainBinding
 import com.vtnd.duynn.presentation.ui.auth.AuthActivity
 import com.vtnd.duynn.utils.extension.*
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.StateFlow
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.androidx.viewmodel.scope.emptyState
 import timber.log.Timber
@@ -22,7 +21,7 @@ import timber.log.Timber
  */
 class MainActivity : AppCompatActivity() {
 
-    private var currentNavController: LiveData<NavController>? = null
+    private var currentNavController: StateFlow<NavController>? = null
     private val binding by viewBinding(ActivityMainBinding::inflate)
     private val viewModel by viewModel<MainViewModel>(state = emptyState())
 
@@ -40,11 +39,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bindVM() {
-        viewModel.logoutEvent.onEach {
+        viewModel.logoutEvent.observe(this) {
             Timber.d("[LOGOUT]")
             startActivity(Intent(this@MainActivity, AuthActivity::class.java))
             finish()
-        }.launchWhenStartedUntilStopped(this)
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

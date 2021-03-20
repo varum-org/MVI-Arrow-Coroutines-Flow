@@ -1,13 +1,9 @@
 package com.vtnd.duynn.presentation.ui.splash
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vtnd.duynn.domain.usecase.CheckAuthUseCase
-import com.vtnd.duynn.utils.extension.Event
-import com.vtnd.duynn.utils.extension.asLiveData
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
