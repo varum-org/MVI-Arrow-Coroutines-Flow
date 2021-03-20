@@ -5,12 +5,12 @@ import android.util.SparseArray
 import androidx.core.util.forEach
 import androidx.core.util.set
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vtnd.duynn.R
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * Created by duynn100198 on 3/18/21.
@@ -25,12 +25,12 @@ fun BottomNavigationView.setupWithNavController(
     fragmentManager: FragmentManager,
     containerId: Int,
     intent: Intent
-): LiveData<NavController> {
+): StateFlow<NavController> {
 
     // Map of tags
     val graphIdToTagMap = SparseArray<String>()
     // Result. Mutable live data with the selected controlled
-    val selectedNavController = MutableLiveData<NavController>()
+    val selectedNavController = MutableStateFlow(NavController(context))
 
     var firstFragmentGraphId = 0
 

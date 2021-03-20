@@ -6,8 +6,8 @@ import com.vtnd.duynn.data.repository.source.UserDataSource
 import com.vtnd.duynn.data.repository.source.local.api.SharedPrefApi
 import com.vtnd.duynn.data.repository.source.local.api.pref.SharedPrefKey.KEY_TOKEN
 import com.vtnd.duynn.data.repository.source.local.api.pref.SharedPrefKey.KEY_USER
-import com.vtnd.duynn.domain.scheduler.DispatchersProvider
 import com.vtnd.duynn.domain.scheduler.AppDispatchers.IO
+import com.vtnd.duynn.domain.scheduler.DispatchersProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.buffer
@@ -35,13 +35,12 @@ class UserLocalDataSourceImpl(
 
     private var userObservable = sharedPrefApi.observeString(KEY_USER)
         .flowOn(dispatchersProvider.dispatcher())
-        .map { json -> json.mapNotNull { it.toUserLocal() } }
+        .map { json -> json.mapNotNull { it.toUserData() } }
         .buffer(1)
         .also { Timber.i("User $it") }
 
     private var tokenObservable = sharedPrefApi.observeString(KEY_TOKEN)
         .flowOn(dispatchersProvider.dispatcher())
-        .map { it }
         .buffer(1)
         .also { Timber.i("Token $it") }
 
@@ -53,7 +52,7 @@ class UserLocalDataSourceImpl(
     override suspend fun token() = withContext(dispatchersProvider.dispatcher()) { token }
 
     override suspend fun user() =
-        withContext(dispatchersProvider.dispatcher()) { userLocal.toUserLocal() }
+        withContext(dispatchersProvider.dispatcher()) { userLocal.toUserData() }
 
     override suspend fun saveUser(user: UserData) = withContext(dispatchersProvider.dispatcher()) {
         this@UserLocalDataSourceImpl.userLocal = userLocalJsonAdapter.toJson(user)
@@ -67,6 +66,6 @@ class UserLocalDataSourceImpl(
         Timber.i("remove User And Token")
     }
 
-    private fun String?.toUserLocal(): UserData? =
+    private fun String?.toUserData(): UserData? =
         runCatching { userLocalJsonAdapter.fromJson(this ?: return null) }.getOrNull()
 }
