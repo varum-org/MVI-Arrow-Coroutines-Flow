@@ -29,7 +29,6 @@ interface UserRepository {
         phone: String,
         avatarUri: Uri?
     ): DomainResult<Any>
-
     suspend fun sendCode(email: String): DomainResult<Any>
     suspend fun checkCode(
         code: Int,
