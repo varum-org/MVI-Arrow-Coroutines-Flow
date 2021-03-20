@@ -2,15 +2,11 @@ package com.vtnd.duynn.data.repository.source.local.api.pref
 
 import android.content.Context
 import android.content.SharedPreferences
-import arrow.core.Option
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.vtnd.duynn.data.repository.source.local.api.SharedPrefApi
-import com.vtnd.duynn.utils.extension.delegate
-import com.vtnd.duynn.utils.extension.getValue
-import com.vtnd.duynn.utils.extension.observeKey
-import com.vtnd.duynn.utils.extension.unwrap
+import com.vtnd.duynn.utils.extension.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlin.properties.ReadWriteProperty
@@ -89,13 +85,13 @@ class SharedPrefApiImpl(private val context: Context, private val moshi: Moshi) 
     override fun observeBoolean(key: String, defValue: Boolean): Flow<Boolean> =
         sharedPreferences.observeKey(key, defValue).unwrap(defValue)
 
-    override fun observeInt(key: String, defValue: Int): Flow<Int>  =
+    override fun observeInt(key: String, defValue: Int): Flow<Int> =
         sharedPreferences.observeKey(key, defValue).unwrap(defValue)
 
-    override fun observeLong(key: String, defValue: Long): Flow<Long>  =
+    override fun observeLong(key: String, defValue: Long): Flow<Long> =
         sharedPreferences.observeKey(key, defValue).unwrap(defValue)
 
-    override fun observeFloat(key: String, defValue: Float): Flow<Float>  =
+    override fun observeFloat(key: String, defValue: Float): Flow<Float> =
         sharedPreferences.observeKey(key, defValue).unwrap(defValue)
 
     override fun <T> putList(key: String, clazz: Class<T>, list: List<T>) {

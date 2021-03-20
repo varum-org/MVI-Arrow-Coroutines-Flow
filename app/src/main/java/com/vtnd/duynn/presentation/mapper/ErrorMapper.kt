@@ -2,8 +2,8 @@ package com.vtnd.duynn.presentation.mapper
 
 import android.database.sqlite.SQLiteException
 import com.vtnd.duynn.data.error.AppError
-import com.vtnd.duynn.data.error.leftResult
 import com.vtnd.duynn.data.repository.source.remote.response.ErrorResponseJsonAdapter
+import com.vtnd.duynn.utils.extension.leftResult
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketException
@@ -61,5 +61,5 @@ class ErrorMapper(private val errorResponseJsonAdapter: ErrorResponseJsonAdapter
     /**
      * Transform [throwable] to left branch of [DomainResult]
      */
-    fun <T> mapAsLeft(throwable: Throwable) = map(throwable).leftResult<T>()
+    fun mapAsLeft(throwable: Throwable) = map(throwable).leftResult()
 }

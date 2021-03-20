@@ -2,16 +2,12 @@ package com.vtnd.duynn.presentation.ui.auth.login
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import arrow.core.Either
 import com.vtnd.duynn.data.repository.source.remote.body.LoginBody
 import com.vtnd.duynn.domain.usecase.UserLoginUseCase
 import com.vtnd.duynn.presentation.base.BaseViewModel
 import com.vtnd.duynn.presentation.mapper.UserMapper
 import com.vtnd.duynn.presentation.ui.auth.login.LoginContract.*
-import com.vtnd.duynn.utils.extension.flatMapFirst
-import com.vtnd.duynn.utils.extension.leftOrNull
-import com.vtnd.duynn.utils.extension.rightOrNull
-import com.vtnd.duynn.utils.extension.withLatestFrom
+import com.vtnd.duynn.utils.extension.*
 import com.vtnd.duynn.utils.types.ValidateErrorType.validateEmail
 import com.vtnd.duynn.utils.types.ValidateErrorType.validatePassword
 import kotlinx.coroutines.ExperimentalCoroutinesApi

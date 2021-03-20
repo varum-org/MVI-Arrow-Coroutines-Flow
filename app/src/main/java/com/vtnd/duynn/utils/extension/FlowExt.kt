@@ -4,7 +4,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import com.vtnd.duynn.data.error.DomainResult
+import com.vtnd.duynn.domain.DomainResult
 import com.vtnd.duynn.presentation.mapper.ErrorMapper
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
