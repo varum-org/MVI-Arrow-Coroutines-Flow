@@ -36,8 +36,7 @@ class UserLocalDataSourceImpl(
 
     private var userObservable = sharedPrefApi.observeString(KEY_USER)
         .flowOn(dispatchersProvider.dispatcher())
-        .map { json ->
-            json.mapNotNull { it.toUserData() } }
+        .map { json -> json.mapNotNull { it.toUserData() } }
         .buffer(1)
         .also { Timber.i("User $it") }
 
