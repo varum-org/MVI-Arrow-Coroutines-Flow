@@ -16,9 +16,7 @@ import java.util.concurrent.atomic.AtomicReference
  */
 @Suppress("NOTHING_TO_INLINE")
 inline fun <T> Flow<DomainResult<T>>.catchError(errorMapper: ErrorMapper): Flow<DomainResult<T>> {
-    return catch {
-        emit(errorMapper.mapAsLeft(it))
-    }
+    return catch { emit(errorMapper.mapAsLeft(it)) }
 }
 
 @ExperimentalCoroutinesApi

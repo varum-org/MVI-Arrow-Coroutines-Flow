@@ -2,6 +2,7 @@ package com.vtnd.duynn.di
 
 import com.vtnd.duynn.presentation.ui.auth.login.LoginViewModel
 import com.vtnd.duynn.presentation.ui.main.MainViewModel
+import com.vtnd.duynn.presentation.ui.main.profile.ProfileViewModel
 import com.vtnd.duynn.presentation.ui.splash.SplashViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -30,5 +31,8 @@ val viewModelModule = module {
     }
     viewModel {
         MainViewModel(userObservableUseCase = get())
+    }
+    viewModel {
+        ProfileViewModel(userLogoutUseCase = get())
     }
 }

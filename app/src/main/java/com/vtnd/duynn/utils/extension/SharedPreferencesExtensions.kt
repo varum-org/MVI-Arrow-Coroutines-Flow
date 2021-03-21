@@ -60,8 +60,7 @@ inline fun <reified T> SharedPreferences.getValue(
 ): T? = when (val clazz = T::class) {
     String::class -> getString(key, default as String?)
     Set::class -> getStringSet(
-        key,
-        (default as Set<*>?)?.filterIsInstanceTo(LinkedHashSet())
+        key, (default as Set<*>?)?.filterIsInstanceTo(LinkedHashSet())
     )
     Boolean::class -> getBoolean(key, default as Boolean)
     Int::class -> getInt(key, default as Int)
