@@ -109,3 +109,9 @@ fun Throwable.nonFatalOrThrow(): Throwable =
 
 fun <A, B, C> Either<A, B>.mapLeft(f: (A) -> C): Either<C, B> =
     fold({ Either.Left(f(it)) }, { Either.Right(it) })
+
+fun <A, B, C> Either<A, B>.mapRight(f: (B) -> C): Either<A, C> =
+    fold({ Either.Left(it) }, { Either.Right(f(it)) })
+
+fun <L, R> Either<L, Option<R>>.toOption(): Option<R> =
+    fold({ Option.None }, { it })

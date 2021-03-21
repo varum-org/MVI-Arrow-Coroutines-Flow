@@ -7,10 +7,15 @@ import java.util.*
  */
 sealed class Option<out T> {
 
-    data class Some<T : Any>(val value: T) : Option<T>()
+    abstract fun isEmpty(): Boolean
+
+    data class Some<T>(val value: T) : Option<T>() {
+        override fun isEmpty(): Boolean = false
+    }
 
     object None : Option<Nothing>() {
         override fun toString() = "None"
+        override fun isEmpty(): Boolean = true
     }
 }
 
@@ -44,12 +49,8 @@ inline fun <T> Option<T>.getOrElse(ifNone: () -> T) = fold(ifNone) { it }
 fun <T> Option<T>.getOrNull(): T? = getOrElse { null }
 
 fun <T> Option<T>.getOrThrow(): T = getOrElse { throw NoSuchElementException("No value present") }
-
 /**
  *
  */
-
-fun <T : Any> T?.toOption(): Option<T> = when (this) {
-    null -> Option.None
-    else -> Option.Some(this)
-}
+fun <T> T?.toOption(): Option<T> =
+    if (this != null) Option.Some(this) else Option.None
