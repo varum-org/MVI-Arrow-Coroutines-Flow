@@ -17,7 +17,7 @@ class SplashViewModel(private val checkAuthUseCase: CheckAuthUseCase) : ViewMode
 
     init {
         viewModelScope.launch {
-            val auth = checkAuthUseCase.invoke().fold(ifLeft = { false }, ifRight = { it })
+            val auth = checkAuthUseCase.invoke().fold({ false }) { it }
             _authEvent.emit(auth)
         }
     }

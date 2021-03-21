@@ -7,12 +7,12 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.vtnd.duynn.BuildConfig
+import com.vtnd.duynn.data.error.ErrorMapper
 import com.vtnd.duynn.data.model.UserDataJsonAdapter
 import com.vtnd.duynn.data.repository.source.local.api.SharedPrefApi
 import com.vtnd.duynn.data.repository.source.remote.api.ApiService
 import com.vtnd.duynn.data.repository.source.remote.middleware.InterceptorImpl
 import com.vtnd.duynn.data.repository.source.remote.response.ErrorResponseJsonAdapter
-import com.vtnd.duynn.presentation.mapper.ErrorMapper
 import com.vtnd.duynn.utils.constants.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
