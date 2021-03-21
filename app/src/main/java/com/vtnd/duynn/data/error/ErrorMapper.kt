@@ -1,7 +1,6 @@
-package com.vtnd.duynn.presentation.mapper
+package com.vtnd.duynn.data.error
 
 import android.database.sqlite.SQLiteException
-import com.vtnd.duynn.data.error.AppError
 import com.vtnd.duynn.data.repository.source.remote.response.ErrorResponseJsonAdapter
 import com.vtnd.duynn.utils.extension.leftResult
 import retrofit2.HttpException

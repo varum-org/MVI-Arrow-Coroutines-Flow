@@ -5,7 +5,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.vtnd.duynn.domain.DomainResult
-import com.vtnd.duynn.presentation.mapper.ErrorMapper
+import com.vtnd.duynn.data.error.ErrorMapper
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import java.util.concurrent.atomic.AtomicBoolean

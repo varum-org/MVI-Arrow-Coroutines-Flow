@@ -1,5 +1,3 @@
-@file:Suppress("IMPLICIT_NOTHING_TYPE_ARGUMENT_IN_RETURN_POSITION")
-
 package com.vtnd.duynn.utils.extension
 
 /**

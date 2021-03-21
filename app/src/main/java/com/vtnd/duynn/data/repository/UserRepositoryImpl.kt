@@ -9,7 +9,7 @@ import com.vtnd.duynn.domain.DomainResult
 import com.vtnd.duynn.domain.repository.UserRepository
 import com.vtnd.duynn.domain.scheduler.AppDispatchers.IO
 import com.vtnd.duynn.domain.scheduler.DispatchersProvider
-import com.vtnd.duynn.presentation.mapper.ErrorMapper
+import com.vtnd.duynn.data.error.ErrorMapper
 import com.vtnd.duynn.utils.extension.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
